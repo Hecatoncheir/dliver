@@ -1,3 +1,4 @@
 /example
 /packages
+.packages
 pubspec.lock

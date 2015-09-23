@@ -1,11 +1,14 @@
 library dliver;
 
-import 'dart:io';
 import 'dart:convert';
-// import 'package:watcher/watcher.dart';
+import 'dart:io';
+import 'package:path/path.dart' as path;
+import 'package:watcher/watcher.dart';
 
 final HOST = InternetAddress.LOOPBACK_IP_V4;
 final PORT = 35729;
+
+var watcher = new DirectoryWatcher(path.absolute('/'));
 
 handleSocketLiveReload(WebSocket socket) {
   socket.listen((message) {
@@ -14,8 +17,10 @@ handleSocketLiveReload(WebSocket socket) {
     var helloData = {
       'command': 'hello',
       'protocols': ['http://livereload.com/protocols/official-7'],
-      'serverName': 'LiveReload 2'
+      'serverName': 'dliver'
     };
+
+    print('LiveReload client connect');
 
     switch (data['command']) {
       case 'hello':
@@ -23,7 +28,12 @@ handleSocketLiveReload(WebSocket socket) {
         break;
     }
 
-    print('LiveReload connect');
+    watcher.events.listen((event) {
+      socket.add(JSON.encode(
+          {'command': 'reload', 'path': '/', 'liveCSS': 'true'}));
+    });
+
+    print(message);
   });
 }
 
@@ -41,6 +51,7 @@ sendLiveReloadScript(request) {
   var lvScript = new File('packages/dliver/livereload.js');
   lvScript.exists().then((bool found) {
     if (found) {
+      request.response.headers.set('Content-Type', 'text/javascript');
       lvScript.openRead().pipe(request.response).catchError((e) {});
     } else {
       _sendNotFound(request.response);
