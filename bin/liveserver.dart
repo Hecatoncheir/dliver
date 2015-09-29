@@ -1,6 +1,5 @@
 import 'package:dliver/dliver.dart';
 
-
 main(){
-  makeLiveReloadServer();
+  var dliver = new DLiver();
 }
