@@ -1,5 +1,5 @@
 name: dliver
-version: 1.0.1
+version: 1.0.1+1
 author: Vostrikov Vitaliy <rasart.pro@gmail.com>
 description: Package for worck with LiveReload extension
 homepage: https://github.com/Rasarts/dliver
