@@ -8,9 +8,9 @@ import 'package:watcher/watcher.dart';
 import 'package:yaml/yaml.dart';
 
 part 'server.dart';
-part 'handleScript.dart';
-part 'handleSocket.dart';
-part 'fileFormats.dart';
+part 'handle_script.dart';
+part 'handle_socket.dart';
+part 'file_formats.dart';
 
 final HOST = InternetAddress.LOOPBACK_IP_V4;
 final PORT = 35729;

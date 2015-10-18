@@ -2,6 +2,9 @@ name: dliver
 version: 1.0.1
 author: Vostrikov Vitaliy <rasart.pro@gmail.com>
 description: LiveReload server for watch some changes for files
+homepage: https://github.com/Rasarts/dliver
+environment:
+    sdk: ">=1.8.0 <2.0.0"
 dependencies:
   watcher: "^0.9.7"
   yaml: "^2.1.7"
