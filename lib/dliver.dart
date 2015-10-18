@@ -5,19 +5,34 @@ import 'dart:io';
 
 import 'package:path/path.dart' as path;
 import 'package:watcher/watcher.dart';
+import 'package:yaml/yaml.dart';
 
 part 'server.dart';
 part 'handleScript.dart';
 part 'handleSocket.dart';
+part 'fileFormats.dart';
 
 final HOST = InternetAddress.LOOPBACK_IP_V4;
 final PORT = 35729;
 
-var watcher = new DirectoryWatcher(path.absolute('/'));
+var urlFrom;
+var directory = Directory.current.path;
+var watcher = new Watcher(directory);
+
+var fileFormats;
 
 class DLiver {
-  DLiver(){
+  DLiver() {
     makeLiveReloadServer();
+    checkWatchConfig();
   }
+
+  reloadFile(Socket socket) => sendReload(socket);
 }
 
+sendReload(Socket socket) {
+  var reloadCommand =
+      JSON.encode({'command': 'reload', 'path': '$urlFrom', 'liveCSS': 'true'});
+  socket.add(reloadCommand);
+  print('Client reloaded');
+}

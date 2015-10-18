@@ -18,3 +18,7 @@ makeLiveReloadServer() {
     }, onError: handleError);
   }).catchError(handleError);
 }
+
+handleError(error) {
+  print(error);
+}

@@ -1,16 +1,17 @@
 part of dliver;
 
-handleSocketLiveReload(WebSocket socket) {
+handleSocketLiveReload(WebSocket socket) async {
+  print('LiveReload Client connect');
+
   socket.listen((message) {
     var data = JSON.decode(message);
+    await urlFrom = data['url'];
 
     var helloData = {
       'command': 'hello',
       'protocols': ['http://livereload.com/protocols/official-7'],
       'serverName': 'dliver'
     };
-
-    print('LiveReload client connect');
 
     switch (data['command']) {
       case 'hello':
@@ -19,15 +20,12 @@ handleSocketLiveReload(WebSocket socket) {
     }
 
     watcher.events.listen((event) {
-      socket.add(
-          JSON.encode({'command': 'reload', 'path': '/', 'liveCSS': 'true'}));
+      var extension = path.extension(event.path);
+      if (fileFormats.contains(extension)) {
+        sendReload(socket);
+      } else {
+        return;
+      }
     });
-
-    print(message);
   });
 }
-
-handleError(error) {
-  print(error);
-}
-

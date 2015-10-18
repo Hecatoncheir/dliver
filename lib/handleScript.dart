@@ -7,11 +7,14 @@ _sendNotFound(HttpResponse response) {
 }
 
 sendLiveReloadScript(request) {
-  var lvScript = new File('packages/dliver/livereload.js');
+  var pathToScript = '${directory}/packages/dliver/livereload.js';
+  var lvScript = new File(pathToScript);
   lvScript.exists().then((bool found) {
     if (found) {
       request.response.headers.set('Content-Type', 'text/javascript');
-      lvScript.openRead().pipe(request.response).catchError((e) {});
+      lvScript.openRead().pipe(request.response).catchError((e) {
+        print(e);
+      });
     } else {
       _sendNotFound(request.response);
     }
