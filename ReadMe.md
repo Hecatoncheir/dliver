@@ -1,6 +1,6 @@
 #LiveReload dart library - Dliver
 
-Makes server for work with livereload [extension](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei)
+Makes server for work with liveReload [extension](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei)
 
 Import library:
 
