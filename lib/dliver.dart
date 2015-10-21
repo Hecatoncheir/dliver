@@ -21,10 +21,10 @@ var watcher = new Watcher(directory);
 
 var fileFormats;
 
-class DLiver {
-  DLiver() {
-    makeLiveReloadServer();
+class Dliver {
+  Dliver() {
     checkWatchConfig();
+    makeLiveReloadServer();
   }
 
   reloadFile(Socket socket) => sendReload(socket);
