@@ -3,6 +3,26 @@ LiveReload dart library - Dliver
 
 Makes server for work with liveReload [extension](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei)
 
+It can be activated with:
+
+```
+pub global activate dliver
+
+```
+
+and use it:
+
+```
+dliver start
+```
+
+Or in pubspec.yaml:
+
+```
+dependencies:
+  dliver: "^1.0.3"
+```
+
 Import library:
 
 ```
